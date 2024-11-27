@@ -166,10 +166,10 @@ namespace billing_receipt
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
-            if (dgv_4.SelectedRows.Count > 0)
+            if (dgv_4.SelectedRows.Count == 1)  // Ensure exactly one row is selected
             {
-                // Confirmation prompt for multi-row deletion
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete the selected records?", "Confirm Deletion", MessageBoxButtons.YesNo);
+                // Confirmation prompt for single-row deletion
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete the selected record?", "Confirm Deletion", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     string connectionString = "Data Source=LAPTOP-NAOMDNI0\\SQLEXPRESS;Initial Catalog=Billingsystem;Integrated Security=True";
@@ -180,80 +180,76 @@ namespace billing_receipt
 
                         try
                         {
-                            // Start a transaction to ensure all deletes happen together
+                            // Start a transaction to ensure the delete happens atomically
                             using (SqlTransaction transaction = conn.BeginTransaction())
                             {
-                                // Loop through selected rows and delete each one
-                                foreach (DataGridViewRow row in dgv_4.SelectedRows)
+                                // Get the selected row
+                                DataGridViewRow row = dgv_4.SelectedRows[0];  // Only one row is selected
+
+                                int customerId = Convert.ToInt32(row.Cells["customer_id"].Value);
+                                int orderId = Convert.ToInt32(row.Cells["odr_id"].Value);
+                                string packageName = row.Cells["package_name"].Value.ToString();
+
+                                // Delete from Billing table
+                                string deleteBillingQuery = "DELETE FROM Billing WHERE odr_id = @OrderId";
+                                using (SqlCommand billingCmd = new SqlCommand(deleteBillingQuery, conn, transaction))
                                 {
-                                    // Skip the new row (if any)
-                                    if (row.IsNewRow) continue;
-
-                                    int customerId = Convert.ToInt32(row.Cells["customer_id"].Value);
-                                    int orderId = Convert.ToInt32(row.Cells["odr_id"].Value);
-
-                                    // Delete from Billing table
-                                    string deleteBillingQuery = "DELETE FROM Billing WHERE odr_id = @OrderId";
-                                    using (SqlCommand billingCmd = new SqlCommand(deleteBillingQuery, conn, transaction))
-                                    {
-                                        billingCmd.Parameters.AddWithValue("@OrderId", orderId);
-                                        billingCmd.ExecuteNonQuery();
-                                    }
-
-                                    // Delete from Order_detail table
-                                    string deleteOrderDetailQuery = "DELETE FROM Order_detail WHERE odr_id = @OrderId";
-                                    using (SqlCommand orderDetailCmd = new SqlCommand(deleteOrderDetailQuery, conn, transaction))
-                                    {
-                                        orderDetailCmd.Parameters.AddWithValue("@OrderId", orderId);
-                                        orderDetailCmd.ExecuteNonQuery();
-                                    }
-
-                                    // Delete from Package table
-                                    string deletePackageQuery = "DELETE FROM Package WHERE package_name = @PackageName";
-                                    using (SqlCommand packageCmd = new SqlCommand(deletePackageQuery, conn, transaction))
-                                    {
-                                        string packageName = row.Cells["package_name"].Value.ToString();
-                                        packageCmd.Parameters.AddWithValue("@PackageName", packageName);
-                                        packageCmd.ExecuteNonQuery();
-                                    }
-
-                                    // Delete from Odr table
-                                    string deleteOrderQuery = "DELETE FROM Odr WHERE odr_id = @OrderId";
-                                    using (SqlCommand orderCmd = new SqlCommand(deleteOrderQuery, conn, transaction))
-                                    {
-                                        orderCmd.Parameters.AddWithValue("@OrderId", orderId);
-                                        orderCmd.ExecuteNonQuery();
-                                    }
-
-                                    // Delete from Customer table
-                                    string deleteCustomerQuery = "DELETE FROM Customer WHERE customer_id = @CustomerId";
-                                    using (SqlCommand customerCmd = new SqlCommand(deleteCustomerQuery, conn, transaction))
-                                    {
-                                        customerCmd.Parameters.AddWithValue("@CustomerId", customerId);
-                                        customerCmd.ExecuteNonQuery();
-                                    }
+                                    billingCmd.Parameters.AddWithValue("@OrderId", orderId);
+                                    billingCmd.ExecuteNonQuery();
                                 }
 
-                                // Commit the transaction to apply all deletions
+                                // Delete from Order_detail table
+                                string deleteOrderDetailQuery = "DELETE FROM Order_detail WHERE odr_id = @OrderId";
+                                using (SqlCommand orderDetailCmd = new SqlCommand(deleteOrderDetailQuery, conn, transaction))
+                                {
+                                    orderDetailCmd.Parameters.AddWithValue("@OrderId", orderId);
+                                    orderDetailCmd.ExecuteNonQuery();
+                                }
+
+                                // Delete from Package table
+                                string deletePackageQuery = "DELETE FROM Package WHERE package_name = @PackageName";
+                                using (SqlCommand packageCmd = new SqlCommand(deletePackageQuery, conn, transaction))
+                                {
+                                    packageCmd.Parameters.AddWithValue("@PackageName", packageName);
+                                    packageCmd.ExecuteNonQuery();
+                                }
+
+                                // Delete from Odr table
+                                string deleteOrderQuery = "DELETE FROM Odr WHERE odr_id = @OrderId";
+                                using (SqlCommand orderCmd = new SqlCommand(deleteOrderQuery, conn, transaction))
+                                {
+                                    orderCmd.Parameters.AddWithValue("@OrderId", orderId);
+                                    orderCmd.ExecuteNonQuery();
+                                }
+
+                                // Delete from Customer table
+                                string deleteCustomerQuery = "DELETE FROM Customer WHERE customer_id = @CustomerId";
+                                using (SqlCommand customerCmd = new SqlCommand(deleteCustomerQuery, conn, transaction))
+                                {
+                                    customerCmd.Parameters.AddWithValue("@CustomerId", customerId);
+                                    customerCmd.ExecuteNonQuery();
+                                }
+
+                                // Commit the transaction to apply the deletion
                                 transaction.Commit();
                             }
 
-                            // Refresh the DataGridView to reflect deletions
+                            // Refresh the DataGridView to reflect the deletion
                             LoadNewData();
-                            MessageBox.Show("Selected rows deleted successfully.");
+                            MessageBox.Show("Selected row deleted successfully.");
                         }
                         catch (Exception ex)
                         {
-                            // Rollback transaction in case of error
+                            // Rollback the transaction in case of an error
                             MessageBox.Show("Error occurred during deletion: " + ex.Message);
-                            // Rollback transaction (if necessary)
+                            // Optionally, you can also rollback the transaction here if needed
                         }
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Please select at least one row to delete.");
+                MessageBox.Show("Please select exactly one row to delete.");
             }
         }
         private void reset4_Click(object sender, EventArgs e)
