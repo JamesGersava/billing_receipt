@@ -30,6 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(billing_info));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label199 = new System.Windows.Forms.Label();
+            this.price2 = new System.Windows.Forms.TextBox();
+            this.comboprod = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.flavor = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.form2exit = new System.Windows.Forms.Button();
             this.anydate = new System.Windows.Forms.DateTimePicker();
@@ -46,25 +53,28 @@
             this.order_id = new System.Windows.Forms.TextBox();
             this.quantity = new System.Windows.Forms.TextBox();
             this.billing_id = new System.Windows.Forms.TextBox();
-            this.product_id = new System.Windows.Forms.TextBox();
-            this.customer_id = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.random_num = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.MistyRose;
-            this.panel1.Controls.Add(this.random_num);
+            this.panel1.BackColor = System.Drawing.Color.MediumPurple;
+            this.panel1.Controls.Add(this.label199);
+            this.panel1.Controls.Add(this.price2);
+            this.panel1.Controls.Add(this.comboprod);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.flavor);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.form2exit);
             this.panel1.Controls.Add(this.anydate);
@@ -81,18 +91,89 @@
             this.panel1.Controls.Add(this.order_id);
             this.panel1.Controls.Add(this.quantity);
             this.panel1.Controls.Add(this.billing_id);
-            this.panel1.Controls.Add(this.product_id);
-            this.panel1.Controls.Add(this.customer_id);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(29, 29);
+            this.panel1.Location = new System.Drawing.Point(29, 21);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(869, 483);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label199
+            // 
+            this.label199.AutoSize = true;
+            this.label199.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label199.Location = new System.Drawing.Point(53, 353);
+            this.label199.Name = "label199";
+            this.label199.Size = new System.Drawing.Size(50, 19);
+            this.label199.TabIndex = 198;
+            this.label199.Text = "Price:";
+            // 
+            // price2
+            // 
+            this.price2.Location = new System.Drawing.Point(207, 353);
+            this.price2.Name = "price2";
+            this.price2.Size = new System.Drawing.Size(97, 22);
+            this.price2.TabIndex = 197;
+            // 
+            // comboprod
+            // 
+            this.comboprod.FormattingEnabled = true;
+            this.comboprod.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboprod.Location = new System.Drawing.Point(207, 225);
+            this.comboprod.Name = "comboprod";
+            this.comboprod.Size = new System.Drawing.Size(97, 24);
+            this.comboprod.TabIndex = 196;
+            this.comboprod.SelectedIndexChanged += new System.EventHandler(this.comboprod_SelectedIndexChanged);
+            this.comboprod.SelectedValueChanged += new System.EventHandler(this.comboprod_SelectedValueChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(52, 272);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(123, 19);
+            this.label14.TabIndex = 195;
+            this.label14.Text = "Product Flavor:";
+            // 
+            // flavor
+            // 
+            this.flavor.Location = new System.Drawing.Point(207, 273);
+            this.flavor.Name = "flavor";
+            this.flavor.Size = new System.Drawing.Size(101, 22);
+            this.flavor.TabIndex = 194;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label13.Font = new System.Drawing.Font("Microsoft YaHei", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(24, 437);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(135, 19);
+            this.label13.TabIndex = 193;
+            this.label13.Text = "Generate ID number";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(56, 397);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(53, 37);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 192;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
@@ -114,11 +195,11 @@
             this.form2exit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.form2exit.BackColor = System.Drawing.Color.MistyRose;
+            this.form2exit.BackColor = System.Drawing.Color.MediumPurple;
             this.form2exit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("form2exit.BackgroundImage")));
             this.form2exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.form2exit.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.form2exit.Location = new System.Drawing.Point(95, 381);
+            this.form2exit.Location = new System.Drawing.Point(484, 384);
             this.form2exit.Name = "form2exit";
             this.form2exit.Size = new System.Drawing.Size(77, 30);
             this.form2exit.TabIndex = 189;
@@ -158,7 +239,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label11.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(92, 134);
+            this.label11.Location = new System.Drawing.Point(51, 134);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(183, 27);
             this.label11.TabIndex = 185;
@@ -166,13 +247,11 @@
             // 
             // submit
             // 
-            this.submit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.submit.BackColor = System.Drawing.Color.MistyRose;
+            this.submit.BackColor = System.Drawing.Color.MediumPurple;
             this.submit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("submit.BackgroundImage")));
             this.submit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.submit.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.submit.ForeColor = System.Drawing.SystemColors.ControlText;
             this.submit.Location = new System.Drawing.Point(684, 377);
             this.submit.Name = "submit";
             this.submit.Size = new System.Drawing.Size(77, 34);
@@ -189,6 +268,7 @@
             this.total_amount.Name = "total_amount";
             this.total_amount.Size = new System.Drawing.Size(147, 22);
             this.total_amount.TabIndex = 183;
+            this.total_amount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.total_amount_KeyPress);
             // 
             // amount_paid
             // 
@@ -199,6 +279,7 @@
             this.amount_paid.Name = "amount_paid";
             this.amount_paid.Size = new System.Drawing.Size(147, 22);
             this.amount_paid.TabIndex = 181;
+            this.amount_paid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amount_paid_KeyPress);
             // 
             // change
             // 
@@ -209,6 +290,8 @@
             this.change.Name = "change";
             this.change.Size = new System.Drawing.Size(147, 22);
             this.change.TabIndex = 180;
+            this.change.TextChanged += new System.EventHandler(this.change_TextChanged);
+            this.change.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.change_KeyPress);
             // 
             // label9
             // 
@@ -268,7 +351,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.order_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.order_id.Location = new System.Drawing.Point(207, 268);
+            this.order_id.Location = new System.Drawing.Point(207, 184);
             this.order_id.Name = "order_id";
             this.order_id.Size = new System.Drawing.Size(147, 24);
             this.order_id.TabIndex = 175;
@@ -279,10 +362,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.quantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quantity.Location = new System.Drawing.Point(207, 314);
+            this.quantity.Location = new System.Drawing.Point(207, 318);
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(147, 24);
+            this.quantity.Size = new System.Drawing.Size(97, 24);
             this.quantity.TabIndex = 174;
+            this.quantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.quantity_KeyPress);
             // 
             // billing_id
             // 
@@ -294,28 +378,6 @@
             this.billing_id.Name = "billing_id";
             this.billing_id.Size = new System.Drawing.Size(147, 24);
             this.billing_id.TabIndex = 173;
-            // 
-            // product_id
-            // 
-            this.product_id.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.product_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.product_id.Location = new System.Drawing.Point(207, 225);
-            this.product_id.Name = "product_id";
-            this.product_id.Size = new System.Drawing.Size(147, 24);
-            this.product_id.TabIndex = 172;
-            // 
-            // customer_id
-            // 
-            this.customer_id.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.customer_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customer_id.Location = new System.Drawing.Point(207, 180);
-            this.customer_id.Name = "customer_id";
-            this.customer_id.Size = new System.Drawing.Size(147, 24);
-            this.customer_id.TabIndex = 171;
             // 
             // label6
             // 
@@ -337,7 +399,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(93, 314);
+            this.label5.Location = new System.Drawing.Point(52, 317);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 19);
             this.label5.TabIndex = 169;
@@ -350,7 +412,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(93, 268);
+            this.label4.Location = new System.Drawing.Point(52, 183);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 19);
             this.label4.TabIndex = 168;
@@ -363,24 +425,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(93, 225);
+            this.label3.Location = new System.Drawing.Point(52, 226);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 19);
             this.label3.TabIndex = 167;
             this.label3.Text = "Products ID:";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(93, 184);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 19);
-            this.label2.TabIndex = 166;
-            this.label2.Text = "Customer ID:";
             // 
             // label1
             // 
@@ -403,18 +452,7 @@
             this.groupBox1.Size = new System.Drawing.Size(934, 538);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
-            // random_num
-            // 
-            this.random_num.Location = new System.Drawing.Point(351, 388);
-            this.random_num.Name = "random_num";
-            this.random_num.Size = new System.Drawing.Size(138, 23);
-            this.random_num.TabIndex = 191;
-            this.random_num.Text = "Generate ID number";
-            this.random_num.UseVisualStyleBackColor = true;
-            this.random_num.Click += new System.EventHandler(this.random_num_Click);
             // 
             // billing_info
             // 
@@ -429,6 +467,7 @@
             this.Load += new System.EventHandler(this.billing_info_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -452,17 +491,20 @@
         private System.Windows.Forms.TextBox order_id;
         private System.Windows.Forms.TextBox quantity;
         private System.Windows.Forms.TextBox billing_id;
-        private System.Windows.Forms.TextBox product_id;
-        private System.Windows.Forms.TextBox customer_id;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button form2exit;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button random_num;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox flavor;
+        private System.Windows.Forms.ComboBox comboprod;
+        private System.Windows.Forms.Label label199;
+        private System.Windows.Forms.TextBox price2;
     }
 }
